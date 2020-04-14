@@ -465,7 +465,7 @@ format_partitions() {
 #INSTALL BASE SYSTEM {{{
 select_linux_version() {
   print_title "LINUX VERSION"
-  version_list=("linux (default)" "linux-lts (long term support)" "linux-hardened (security features)")
+  version_list=("linux (default)" "linux-lts (long term support)" "linux-hardened (security features)" "linux-zen (desktop optimized)")
   PS3="$prompt1"
   echo -e "Select linux version to install\n"
   select VERSION in "${version_list[@]}"; do
@@ -476,6 +476,8 @@ select_linux_version() {
         pacstrap ${MOUNTPOINT} base linux-lts linux-lts-headers
       elif [ "linux-hardened (security features)" == "$VERSION" ]; then
         pacstrap ${MOUNTPOINT} base linux-hardened linux-hardened-headers
+      elif [ "linux-zen (desktop optimized)" == "$VERSION" ]; then
+        pacstrap ${MOUNTPOINT} base linux-zen linux-zen-headers
       fi
       pacstrap ${MOUNTPOINT} \
         cryptsetup lvm2 netctl dhcpcd inetutils jfsutils diffutils e2fsprogs \
@@ -635,6 +637,8 @@ configure_mkinitcpio() {
     arch_chroot "mkinitcpio -p linux-hardened"
   elif [ "$(arch-chroot ${MOUNTPOINT} ls /boot | grep lts -c)" -gt "0" ]; then
     arch_chroot "mkinitcpio -p linux-lts"
+  elif [ "$(arch-chroot ${MOUNTPOINT} ls /boot | grep zen -c)" -gt "0" ]; then
+    arch_chroot "mkinitcpio -p linux-zen"
   else
     arch_chroot "mkinitcpio -p linux"
   fi
@@ -785,6 +789,8 @@ configure_bootloader() {
           img_name="linux-hardened"
         elif [ "$(arch-chroot ${MOUNTPOINT} ls /boot | grep lts -c)" -gt "0" ]; then
           img_name="linux-lts"
+        elif [ "$(arch-chroot ${MOUNTPOINT} ls /boot | grep zen -c)" -gt "0" ]; then
+          img_name="linux-zen"
         else
           img_name="linux"
         fi

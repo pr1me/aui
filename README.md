@@ -16,14 +16,13 @@ You can try it first with a `virtualbox`
 ### With git
 - Increase cowspace partition: `mount -o remount,size=2G /run/archiso/cowspace`
 - Get list of packages and install git: `pacman -Sy git`
-- get the script: `git clone git://github.com/helmuthdu/aui`
+- get the script: `git clone git://github.com/pr1me/aui`
 
 ### Without git
 - Increase cowspace partition: `mount -o remount,size=2G /run/archiso/cowspace`
-- get the script: ` wget https://github.com/helmuthdu/aui/tarball/master -O - | tar xz`
-    - an alternate URL (for less typing (github shorten)) is ` wget https://git.io/vS1GH -O - | tar xz`
-    - an alternate URL (for less typing) is ` wget http://bit.ly/NoUPC6 -O - | tar xz`
-    - super short `wget ow.ly/wnFgh -O aui.zip`
+- get the script: ` wget https://github.com/pr1me/aui/tarball/master -O - | tar xz`
+    - an alternate URL (for less typing (github shorten)) is ` wget https://git.io/JfeQ7 -O - | tar xz`
+    - an alternate URL (for less typing) is ` wget https://bit.ly/34yIbPy -O - | tar xz`
 
 ## How to use
 - FIFO [system base]: `cd <dir> && ./fifo`
